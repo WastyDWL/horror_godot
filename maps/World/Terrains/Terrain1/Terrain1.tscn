@@ -1,0 +1,178 @@
+[gd_scene load_steps=16 format=3 uid="uid://dhl305uagemux"]
+
+[ext_resource type="PackedScene" uid="uid://chfq7t55ocf1k" path="res://Scenes/player.tscn" id="3_3vt42"]
+[ext_resource type="Shader" path="res://maps/World/Terrains/Terrain1/Terrain12.gdshader" id="4_57sqm"]
+[ext_resource type="Shader" path="res://maps/World/Terrains/Terrain1/Terrain1.gdshader" id="4_pj0jl"]
+[ext_resource type="PackedScene" path="res://maps/World/Terrains/Terrain1/Models/palm_tree_v2_lowpolyedition/PalmTree.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://maps/World/Terrains/Terrain1/Models/jkm_oaktree/OakTree.tscn" id="13"]
+
+[sub_resource type="Gradient" id="Gradient_wq8q5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o7x41"]
+gradient = SubResource("Gradient_wq8q5")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_51ipw"]
+normal_texture = SubResource("GradientTexture1D_o7x41")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmlvu"]
+render_priority = 0
+shader = ExtResource("4_57sqm")
+shader_parameter/n = Vector3(0, 1, 0)
+shader_parameter/triplanar_scale = 1.0
+shader_parameter/blend_size = 1.0
+shader_parameter/blend_offset = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2kl7"]
+next_pass = SubResource("ShaderMaterial_mmlvu")
+metallic = 1.0
+metallic_specular = 0.58
+metallic_texture = SubResource("CanvasTexture_51ipw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6bxj"]
+shader = ExtResource("4_pj0jl")
+shader_parameter/baseColor = Color(0, 0.64, 0.84, 1)
+shader_parameter/horizonColor = Color(0.36, 0.59, 0.86, 1)
+shader_parameter/horizonHeight = -0.2
+shader_parameter/rayleighCoefficient = 0.2
+shader_parameter/mieCoefficient = null
+shader_parameter/mieEccentricity = 0.8
+shader_parameter/sunDiskScale = 0.2
+shader_parameter/sunSmoothing = 0.5
+
+[sub_resource type="Sky" id="Sky_q6mcf"]
+sky_material = SubResource("ShaderMaterial_o6bxj")
+
+[sub_resource type="Environment" id="Environment_xrdus"]
+background_mode = 2
+sky = SubResource("Sky_q6mcf")
+ambient_light_color = Color(0.54099, 0.54099, 0.54099, 1)
+ambient_light_energy = 9.25
+reflected_light_source = 1
+tonemap_mode = 1
+ssr_enabled = true
+ssr_fade_in = 0.184672
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_0jvps"]
+
+[sub_resource type="Compositor" id="Compositor_g6vvc"]
+
+[node name="HTerrain" type="Node3D"]
+
+[node name="River" type="Node3D" parent="."]
+transform = Transform3D(0.622993, 0, 0.782228, 0, 1, 0, -0.782228, 0, 0.622993, 18.0508, 18.7377, 14.1012)
+
+[node name="Scatter3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -55.7889)
+
+[node name="PalmTree3" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0116994, 0, 0.0993133, 0, 0.05, 0, -0.0993133, 0, -0.0116994, 134.89, 0, 126.968)
+
+[node name="PalmTree4" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0986778, 0, 0.0162077, 0, 0.05, 0, -0.0162077, 0, 0.0986778, 176.867, 3.8147e-06, 205.363)
+
+[node name="PalmTree5" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0499787, 0, 0.0866148, 0, 0.05, 0, -0.0866148, 0, 0.0499787, 176.157, 0, 165.426)
+
+[node name="PalmTree6" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0658186, 0, 0.0752855, 0, 0.05, 0, -0.0752855, 0, 0.0658186, 151.036, -3.8147e-06, 140.02)
+
+[node name="PalmTree7" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.00545758, 0, 0.099851, 0, 0.05, 0, -0.099851, 0, 0.00545758, 120.424, -3.8147e-06, 120.141)
+
+[node name="PalmTree8" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0646758, 0, -0.0762695, 0, 0.05, 0, 0.0762695, 0, -0.0646758, 128.432, 3.8147e-06, 100.488)
+
+[node name="PalmTree9" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0982814, 0, 0.0184601, 0, 0.05, 0, -0.0184601, 0, -0.0982814, 149.945, 3.8147e-06, 124.459)
+
+[node name="PalmTree10" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0940293, 0, -0.0340365, 0, 0.05, 0, 0.0340365, 0, -0.0940293, 204.462, -7.62939e-06, 103.036)
+
+[node name="PalmTree11" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0415547, 0, 0.0909572, 0, 0.05, 0, -0.0909572, 0, -0.0415547, 191.931, 0, 81.8263)
+
+[node name="PalmTree12" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0830283, 0, -0.0557343, 0, 0.05, 0, 0.0557343, 0, 0.0830283, 193.729, -3.8147e-06, 102.439)
+
+[node name="PalmTree13" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0763025, 0, 0.0646369, 0, 0.05, 0, -0.0646369, 0, 0.0763025, 145.502, -7.62939e-06, 64.1001)
+
+[node name="PalmTree14" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0995724, 0, -0.0092383, 0, 0.05, 0, 0.0092383, 0, -0.0995724, 111.363, 3.8147e-06, 34.5968)
+
+[node name="PalmTree15" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0152231, 0, -0.0988345, 0, 0.05, 0, 0.0988345, 0, -0.0152231, 124.332, 0, 68.7412)
+
+[node name="PalmTree16" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0997322, 0, 0.0073137, 0, 0.05, 0, -0.0073137, 0, 0.0997322, 70.6618, -7.62939e-06, 41.3095)
+
+[node name="PalmTree18" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0621892, 0, -0.0783103, 0, 0.05, 0, 0.0783103, 0, 0.0621892, 66.4535, -3.8147e-06, 182.431)
+
+[node name="PalmTree19" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0836936, 0, -0.0547301, 0, 0.05, 0, 0.0547301, 0, -0.0836936, 88.3877, 0, 209.359)
+
+[node name="PalmTree20" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0305107, 0, 0.0952318, 0, 0.05, 0, -0.0952318, 0, 0.0305107, 99.6021, -3.8147e-06, 201.732)
+
+[node name="PalmTree22" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0321449, 0, 0.0946927, 0, 0.05, 0, -0.0946927, 0, 0.0321449, 55.9647, 3.8147e-06, 192.537)
+
+[node name="PalmTree23" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0966373, 0, -0.0257144, 0, 0.05, 0, 0.0257144, 0, -0.0966373, 44.7842, 0, 195.923)
+
+[node name="PalmTree24" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0544958, 0, -0.0838464, 0, 0.05, 0, 0.0838464, 0, -0.0544958, 44.9279, -3.8147e-06, 147.941)
+
+[node name="PalmTree25" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0218847, 0, -0.0975759, 0, 0.05, 0, 0.0975759, 0, 0.0218847, 51.8842, -3.8147e-06, 142.851)
+
+[node name="PalmTree27" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0463724, 0, -0.088598, 0, 0.05, 0, 0.088598, 0, -0.0463724, 58.2721, -3.8147e-06, 101.364)
+
+[node name="PalmTree28" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0370276, 0, -0.0928922, 0, 0.05, 0, 0.0928922, 0, 0.0370276, 44.4156, 0, 91.9835)
+
+[node name="PalmTree29" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0668922, 0, 0.0743333, 0, 0.05, 0, -0.0743333, 0, -0.0668922, 40.3555, 0, 74.6929)
+
+[node name="PalmTree30" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0210075, 0, -0.0977685, 0, 0.05, 0, 0.0977685, 0, -0.0210075, 38.6133, -3.8147e-06, 65.4898)
+
+[node name="PalmTree31" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0462256, 0, -0.0886746, 0, 0.05, 0, 0.0886746, 0, 0.0462256, 41.4446, -7.62939e-06, 147.976)
+
+[node name="PalmTree33" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0594228, 0, 0.0804297, 0, 0.05, 0, -0.0804297, 0, -0.0594228, 110.372, 3.8147e-06, 202.913)
+
+[node name="PalmTree34" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.0272428, 0, 0.0962176, 0, 0.05, 0, -0.0962176, 0, 0.0272428, 195.769, -3.8147e-06, 75.9409)
+
+[node name="PalmTree35" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(0.077513, 0, 0.0631801, 0, 0.05, 0, -0.0631801, 0, 0.077513, 142.714, 0, 55.5178)
+
+[node name="PalmTree36" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.1, 0, 8.92313e-05, 0, 0.05, 0, -8.92313e-05, 0, -0.1, 105.899, -3.8147e-06, 75.7534)
+
+[node name="PalmTree37" parent="Scatter3D" instance=ExtResource("12")]
+transform = Transform3D(-0.0234034, 0, -0.0972228, 0, 0.05, 0, 0.0972228, 0, -0.0234034, 114.555, 0, 116.113)
+
+[node name="OakTree" parent="Scatter3D" instance=ExtResource("13")]
+transform = Transform3D(-0.414917, 0, -0.279005, 0, 0.5, 0, 0.279005, 0, -0.414917, 86.6809, 0.366459, 181.559)
+
+[node name="HTerrainDetailLayer" type="Node3D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_3vt42")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.57661, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.756, 0.514637, 126.159)
+use_collision = true
+size = Vector3(422.566, 1, 400.567)
+material = SubResource("StandardMaterial3D_a2kl7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+process_mode = 3
+environment = SubResource("Environment_xrdus")
+camera_attributes = SubResource("CameraAttributesPractical_0jvps")
+compositor = SubResource("Compositor_g6vvc")

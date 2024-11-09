@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwr6jw8yo0u2k"
+path="res://.godot/imported/Horror Music World — MONST3R - The Abandoned _ Scary Dark Ambient Horror Music (www.lightaudio.ru).mp3-562718c168e9188b1991a6eb94944b58.mp3str"
+
+[deps]
+
+source_file="res://sounds/Horror Music World — MONST3R - The Abandoned _ Scary Dark Ambient Horror Music (www.lightaudio.ru).mp3"
+dest_files=["res://.godot/imported/Horror Music World — MONST3R - The Abandoned _ Scary Dark Ambient Horror Music (www.lightaudio.ru).mp3-562718c168e9188b1991a6eb94944b58.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

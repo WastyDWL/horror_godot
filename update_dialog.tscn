@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=3 uid="uid://csgdjbygfyke4"]
+
+[sub_resource type="GDScript" id="GDScript_0wn0w"]
+script/source = "@tool
+extends AcceptDialog
+
+signal updated
+
+const DOWNLOAD_URL: String = \"https://github.com/shomykohai/quest-system/archive/refs/tags/%s.zip\"
+const TEMP_FILE_PATH: String = \"user://quest_system_temp.zip\"
+
+@onready var version_label: RichTextLabel = %VersionLabel
+@onready var download_button: Button = %DownloadButton
+@onready var http_request: HTTPRequest = %HTTPRequest
+
+var new_ver: String = \"\"
+var old_ver: String = \"\"
+var plugin_path: String = \"\"
+
+
+func prepare() -> void:
+	new_ver = get_meta(\"new_ver\")
+	old_ver = get_meta(\"old_ver\")
+	plugin_path = get_meta(\"plugin_path\")
+	version_label.text = version_label.text % [new_ver, old_ver]
+	%LinkButton.uri = \"https://github.com/shomykohai/quest-system/releases/tag/%s\" % new_ver
+	title = new_ver
+
+
+func _save_zip(bytes: PackedByteArray) -> void:
+	var file := FileAccess.open(TEMP_FILE_PATH, FileAccess.WRITE)
+	file.store_buffer(bytes)
+	file.close()
+
+
+func _on_download_button_pressed():
+	http_request.request(DOWNLOAD_URL % new_ver)
+	download_button.text = \"Downloading...\"
+	download_button.disabled = true
+
+
+func _on_http_request_request_completed(result, response_code, headers, body):
+	if result != HTTPRequest.RESULT_SUCCESS:
+		download_button.text = \"Download failed. Try again later.\"
+		download_button.disabled = false
+		return
+
+	_save_zip(body)
+
+	var zip := ZIPReader.new()
+	zip.open(TEMP_FILE_PATH)
+	var files := zip.get_files()
+
+	var zip_base_path: String = files[1]
+	var save_path: String = plugin_path.get_base_dir()
+
+	# Remove archive and repo base path from file list
+	files.remove_at(0)
+	files.remove_at(0)
+
+	OS.move_to_trash(ProjectSettings.globalize_path(plugin_path))
+
+	for path in files:
+		var new_path := path.replace(zip_base_path, \"\")
+		if path.ends_with(\"/\"):
+			DirAccess.make_dir_recursive_absolute(save_path + \"/%s\" % new_path)
+		else:
+			var file := FileAccess.open(save_path + \"/%s\" % new_path, FileAccess.WRITE)
+			file.store_buffer(zip.read_file(path))
+
+	zip.close()
+	DirAccess.remove_absolute(TEMP_FILE_PATH)
+
+	updated.emit()
+
+	download_button.text = \"Updated!\"
+	version_label.text = \"You're running the last version of QuestSystem.\"
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wvyqq"]
+load_path = "res://.godot/imported/update.svg-6b2008c4976c1b24467000932ef7aafb.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6wmr"]
+
+[node name="AcceptDialog" type="AcceptDialog"]
+initial_position = 1
+size = Vector2i(300, 250)
+visible = true
+unresizable = true
+min_size = Vector2i(300, 250)
+max_size = Vector2i(300, 250)
+ok_button_text = "Close"
+script = SubResource("GDScript_0wn0w")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 201.0
+alignment = 1
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_wvyqq")
+stretch_mode = 3
+
+[node name="VersionLabel" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j6wmr")
+bbcode_enabled = true
+text = "[center]A new version is available: [color=green]%s[/color]
+Current:  [color=red]%s[/color]"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="DownloadButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Download"
+
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Read Changes..."
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="pressed" from="VBoxContainer/DownloadButton" to="." method="_on_download_button_pressed"]

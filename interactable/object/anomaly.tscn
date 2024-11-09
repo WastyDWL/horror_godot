@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://jf0k8re42n6v"]
+
+[ext_resource type="PackedScene" uid="uid://cw77jvda28ubq" path="res://interactable/interactable.tscn" id="1_8j7fl"]
+[ext_resource type="Script" path="res://interactable/object/collision_shape_3d.gd" id="2_4ltco"]
+[ext_resource type="AudioStream" uid="uid://buyt2oxjkrsn0" path="res://sounds/websdr_recording_2024-10-30T17_46_09Z_3750.9kHz.mp3" id="3_5i372"]
+[ext_resource type="PackedScene" uid="uid://curc07g3hrmrs" path="res://effects/force_field/force_field_preview.tscn" id="4_kfuea"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_f8asq"]
+map_width = 14
+map_depth = 36
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8fwrj"]
+
+[node name="Anomaly" type="Node3D"]
+
+[node name="Interactable" parent="." instance=ExtResource("1_8j7fl")]
+
+[node name="CollisionShape3D" parent="Interactable" index="0"]
+shape = SubResource("HeightMapShape3D_f8asq")
+script = ExtResource("2_4ltco")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8fwrj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5i372")
+bus = &"New Bus"
+
+[node name="ForceFieldPreview" parent="." instance=ExtResource("4_kfuea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0249395, 0, -0.00270462)
+
+[connection signal="focused" from="Interactable" to="Interactable" method="_on_focused"]
+[connection signal="interacted" from="Interactable" to="Interactable" method="_on_interacted"]
+[connection signal="unfocused" from="Interactable" to="Interactable" method="_on_unfocused"]
+
+[editable path="Interactable"]

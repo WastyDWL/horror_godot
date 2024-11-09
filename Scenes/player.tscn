@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=3 uid="uid://chfq7t55ocf1k"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_qexrp"]
+[ext_resource type="Shader" path="res://Scenes/player.gdshader" id="2_ao2x2"]
+[ext_resource type="PackedScene" uid="uid://2jfjea1qvu0a" path="res://interactable/playerinteractor.tscn" id="3_f87yt"]
+[ext_resource type="Texture2D" uid="uid://dsboes4wu38u3" path="res://png-klev-club-p-svet-far-png-24.png" id="3_i7jmx"]
+[ext_resource type="AudioStream" uid="uid://buyt2oxjkrsn0" path="res://sounds/websdr_recording_2024-10-30T17_46_09Z_3750.9kHz.mp3" id="5_i3uhl"]
+[ext_resource type="PackedScene" uid="uid://cntiiryj5aduf" path="res://models/radio_yaesu_vx-8.glb" id="5_mb148"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5thyn"]
+shader = ExtResource("2_ao2x2")
+shader_parameter/shake = 4.191
+shader_parameter/noiseQuality = 250.0
+shader_parameter/noiseIntensity = 0.024
+shader_parameter/offsetIntensity = 0.027
+shader_parameter/colorOffsetIntensity = 0.8
+shader_parameter/pixelSize = 548.495
+shader_parameter/grainIntensity = 0.04
+shader_parameter/use_overlay = true
+shader_parameter/use_lens_distortion = true
+shader_parameter/overlay_color = Color(0.454902, 1, 1, 10)
+shader_parameter/lens_distortion_strength = 0.08
+
+[sub_resource type="QuadMesh" id="QuadMesh_u1oe5"]
+lightmap_size_hint = Vector2i(14, 14)
+material = SubResource("ShaderMaterial_5thyn")
+flip_faces = true
+add_uv2 = true
+uv2_padding = 4.97
+size = Vector2(2, 2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3pj2i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_816h2"]
+size = Vector3(0.406128, 1.86719, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ty3j8"]
+radius = 0.931587
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94587, 0)
+script = ExtResource("1_qexrp")
+cameraAcceleration = 1.0
+
+[node name="Hand" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36, 0.195231, -0.3)
+light_color = Color(0.772568, 0.944884, 0.996638, 1)
+light_volumetric_fog_energy = 16.0
+light_projector = ExtResource("3_i7jmx")
+shadow_enabled = true
+spot_range = 280.991
+spot_angle = 44.588
+spot_angle_attenuation = 0.535887
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"New Bus"
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.848843, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+cull_mask = 1023
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head/Camera3D"]
+mesh = SubResource("QuadMesh_u1oe5")
+
+[node name="PlayerInteractor" parent="head/Camera3D" node_paths=PackedStringArray("player") instance=ExtResource("3_f87yt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.848843, -2.02031)
+player = NodePath("../../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="head/Camera3D/PlayerInteractor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.85876)
+shape = SubResource("SphereShape3D_3pj2i")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="head/Camera3D"]
+visible = false
+
+[node name="Sketchfab_Scene" parent="head/Camera3D" instance=ExtResource("5_mb148")]
+transform = Transform3D(0.0972092, -0.0150422, -0.196478, 0.191851, 0.161214, 0.0203684, 0.26786, -0.110008, 0.056715, -0.261632, -0.450256, -0.486686)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="head/Camera3D/Sketchfab_Scene"]
+transform = Transform3D(1.30217, -1.78814e-07, 5.96046e-08, -1.19209e-07, 1.35104, 0, -2.98023e-08, 0, 1.36898, 0.311616, 0.560229, 0.0513404)
+light_energy = 0.2
+light_indirect_energy = 0.323
+light_volumetric_fog_energy = 0.354
+light_bake_mode = 1
+
+[node name="Area3D" type="Area3D" parent="head/Camera3D/Sketchfab_Scene"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="head/Camera3D/Sketchfab_Scene/Area3D"]
+transform = Transform3D(1, 3.57628e-07, -4.17233e-07, 0, 1, -1.3411e-07, 0, -1.2815e-06, 1, -0.0546103, 1.12762, 0.0268023)
+shape = SubResource("BoxShape3D_816h2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="head/Camera3D/Sketchfab_Scene"]
+physics_interpolation_mode = 1
+transform = Transform3D(0.867219, -0.616718, -1.20429, -0.142974, 1.53669, -0.836289, 1.13423, 0.665238, 0.815366, 0.209223, 0.81799, -0.0858753)
+stream = ExtResource("5_i3uhl")
+attenuation_model = 2
+unit_size = 4.29
+max_db = -0.714
+pitch_scale = 1.3
+max_distance = 5.0
+max_polyphony = 2
+panning_strength = 1.2
+bus = &"New Bus"
+area_mask = 2
+emission_angle_enabled = true
+doppler_tracking = 2
+parameters/looping = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_ty3j8")

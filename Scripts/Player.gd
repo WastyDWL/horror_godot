@@ -6,6 +6,12 @@ extends CharacterBody3D
 @export var cameraAcceleration = 3.0
 @export var jumpForce = 8.0
 @export var gravity = 10.0
+const sprinting_speed = 11.8
+const crouching_speed = 3.0
+
+var lerp_speed = 10.0
+
+var crouching_depth = -1
 
 @onready var camera = $head/Camera3D
 @onready var head = $head
@@ -46,3 +52,14 @@ func _process(delta):
 	else:
 		velocity.y -= gravity * delta
 	move_and_slide()
+	
+	if Input.is_action_pressed("crouch"):
+		playerSpeed = crouching_speed
+		head.position.y = lerp(head.position.y, 1.8 + crouching_depth, delta*lerp_speed)
+	else:
+		head.position.y = lerp(head.position.y, 1.8, delta*lerp_speed)
+		
+		if Input.is_action_pressed("sprint"):
+			playerSpeed = sprinting_speed
+		else:
+			playerSpeed = playerAcceleration

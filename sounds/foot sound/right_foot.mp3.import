@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c5xpcm8yg0g0k"
+path="res://.godot/imported/right_foot.mp3-e73237ad1301b8ab903770f711735ab0.mp3str"
+
+[deps]
+
+source_file="res://sounds/foot sound/right_foot.mp3"
+dest_files=["res://.godot/imported/right_foot.mp3-e73237ad1301b8ab903770f711735ab0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -16,7 +16,9 @@ var crouching_depth = -1
 @onready var camera = $head/Camera3D
 @onready var head = $head
 @onready var hand = $Hand
-
+@onready var ray_cast_3d = $RayCast3D
+@onready  var standing_collision_shape = $"../Node3D/StaticBody3D42/standing_collision_shape"
+@onready  var crouching_collision_shape = $"../Node3D/StaticBody3D42/crouching_collision_shape"
 @onready var flashlitght = $Hand/SpotLight3D
 
 
@@ -56,7 +58,7 @@ func _process(delta):
 	if Input.is_action_pressed("crouch"):
 		playerSpeed = crouching_speed
 		head.position.y = lerp(head.position.y, 1.8 + crouching_depth, delta*lerp_speed)
-	else:
+	elif !ray_cast_3d.is_colliding():
 		head.position.y = lerp(head.position.y, 1.8, delta*lerp_speed)
 		
 		if Input.is_action_pressed("sprint"):

@@ -21,7 +21,7 @@ Audio="*res://addons/AudioBySymbol/Code/Autoloads/audio_autoload.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AudioBySymbol/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

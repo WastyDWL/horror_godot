@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2bssym0nst4o"]
+[gd_scene load_steps=14 format=3 uid="uid://c2bssym0nst4o"]
 
 [ext_resource type="PackedScene" uid="uid://chfq7t55ocf1k" path="res://Scenes/player.tscn" id="2_gxm3f"]
 [ext_resource type="Material" uid="uid://m80rmki4fbox" path="res://assets/sky/skies/night_sky.tres" id="2_uig5h"]
 [ext_resource type="AudioStream" uid="uid://dwr6jw8yo0u2k" path="res://sounds/Horror Music World — MONST3R - The Abandoned _ Scary Dark Ambient Horror Music (www.lightaudio.ru).mp3" id="3_1mers"]
 [ext_resource type="PackedScene" uid="uid://jf0k8re42n6v" path="res://interactable/object/anomaly.tscn" id="3_psqrq"]
+[ext_resource type="PackedScene" uid="uid://bw0aordonr13a" path="res://interactable/object/anomaly2.tscn" id="4_ywebg"]
 [ext_resource type="PackedScene" uid="uid://da600q0r2m6p7" path="res://node_3d.tscn" id="5_v866m"]
 
 [sub_resource type="Sky" id="Sky_yp2cl"]
@@ -70,7 +71,7 @@ transform = Transform3D(0.992102, -0.125437, 0, 0.125437, 0.992102, 0, 0, 0, 1, 
 mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(0.00684211, -0.999976, 0, 0.999976, 0.00684211, 0, 0, 0, 1, -15.6794, -0.0524826, 0.257477)
+transform = Transform3D(0.00683481, -0.998908, -0.0461999, 0.999976, 0.00684211, 0, 0.000316105, -0.0461988, 0.998932, -15.6794, -0.0524826, 11.7391)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D3"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -194,6 +195,7 @@ transform = Transform3D(0.120788, -0.992619, -0.0108866, 0.0104418, -0.00969577,
 shape = SubResource("BoxShape3D_anqj0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/StaticBody3D16"]
+transform = Transform3D(1, 0, 1.86265e-09, 1.49012e-08, 1, -1.16415e-10, 0, 2.32831e-10, 1, 0.121685, -0.999989, -0.0109674)
 mesh = SubResource("BoxMesh_u647q")
 skeleton = NodePath("")
 
@@ -238,7 +240,7 @@ mesh = SubResource("BoxMesh_u647q")
 skeleton = NodePath("")
 
 [node name="StaticBody3D21" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(-0.0402352, -0.999147, -0.00926832, 0.0104418, -0.00969577, 0.999899, -0.999136, 0.0401344, 0.0108231, -7.54712, 0.01402, -32.1866)
+transform = Transform3D(-0.0908719, -0.995824, -0.0087073, 0.0104418, -0.00969577, 0.999899, -0.995808, 0.0907718, 0.0112794, -6.48404, 0.01402, -33.6392)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D21"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -388,7 +390,7 @@ mesh = SubResource("BoxMesh_u647q")
 skeleton = NodePath("")
 
 [node name="StaticBody3D35" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(-0.00675912, 0.987847, 0.155279, 0.999976, 0.00684211, -1.14219e-10, -0.00106244, 0.155276, -0.987871, -18.4652, -0.0524826, -24.0961)
+transform = Transform3D(-0.00684027, 0.999707, 0.0232104, 0.999976, 0.00684211, -7.09299e-11, -0.000158812, 0.0232106, -0.999731, -15.5791, 0.021486, -24.0961)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D35"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -398,7 +400,7 @@ transform = Transform3D(1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0, 1, 0.088982
 mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D36" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(0.00132265, -0.193305, 0.981138, 0.999977, 0.00684211, 0, -0.00671305, 0.981115, 0.19331, -35.7983, -0.0524826, -11.3061)
+transform = Transform3D(0.00132265, -0.193305, 0.981138, 0.999977, 0.00684211, 0, -0.00671305, 0.981115, 0.19331, -31.1743, -0.0524826, -11.9644)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D36"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -466,6 +468,9 @@ skeleton = NodePath("")
 [node name="crouching_collision_shape" type="MeshInstance3D" parent="Node3D/StaticBody3D42"]
 mesh = SubResource("BoxMesh_u647q")
 skeleton = NodePath("")
+
+[node name="Anomaly2" parent="Node3D" instance=ExtResource("4_ywebg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.1663, 1.92491, -61.9061)
 
 [node name="Anomaly" parent="." instance=ExtResource("3_psqrq")]
 transform = Transform3D(1, 1.97906e-09, -4.19386e-08, -3.60887e-09, 1, 9.31323e-10, 7.68523e-08, -4.65661e-09, 1, 26.1547, 1.40332, -30.5536)

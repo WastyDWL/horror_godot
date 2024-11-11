@@ -14,10 +14,10 @@ func _physics_process(_delta: float) -> void:
 	if new_closest != cached_closest:
 		if is_instance_valid(cached_closest):
 			unfocus(cached_closest)
-			audio_stream_player_3d.stop()
+			
 		if new_closest:
 			focus(new_closest)
-			audio_stream_player_3d.play()
+			
 
 		cached_closest = new_closest
 

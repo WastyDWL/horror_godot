@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2bssym0nst4o"]
+[gd_scene load_steps=21 format=3 uid="uid://c2bssym0nst4o"]
 
+[ext_resource type="Script" path="res://Scenes/gg.gd" id="1_ky01n"]
 [ext_resource type="PackedScene" uid="uid://chfq7t55ocf1k" path="res://Scenes/player.tscn" id="2_gxm3f"]
 [ext_resource type="Material" uid="uid://m80rmki4fbox" path="res://assets/sky/skies/night_sky.tres" id="2_uig5h"]
 [ext_resource type="AudioStream" uid="uid://dwr6jw8yo0u2k" path="res://sounds/Horror Music World — MONST3R - The Abandoned _ Scary Dark Ambient Horror Music (www.lightaudio.ru).mp3" id="3_1mers"]
@@ -30,13 +31,65 @@ size = Vector3(30, 1, 30)
 [sub_resource type="BoxMesh" id="BoxMesh_va7ky"]
 size = Vector3(30, 1, 30)
 
+[sub_resource type="Animation" id="Animation_2aarh"]
+resource_name = "new_animation"
+length = 15.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anomaly2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.96667, 7, 10.0333, 14.9667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-33.415, 3, -49.35), Vector3(-33.415, 3, -38.073), Vector3(-33.415, 3, -60.419), Vector3(-23.055, 3, -67.514), Vector3(-33.415, 3, -49.35)]
+}
+
+[sub_resource type="Animation" id="Animation_x1jno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anomaly2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-33.4155, 0.520992, -49.3495)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2x4b6"]
+_data = {
+"RESET": SubResource("Animation_x1jno"),
+"new_animation": SubResource("Animation_2aarh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pm650"]
+animation = &"new_animation"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kbuaa"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_67d3q"]
+states/Start/position = Vector2(206, 100)
+states/new_animation/node = SubResource("AnimationNodeAnimation_pm650")
+states/new_animation/position = Vector2(407, 100)
+transitions = ["Start", "new_animation", SubResource("AnimationNodeStateMachineTransition_kbuaa")]
+
 [node name="Gg" type="Node3D"]
+script = ExtResource("1_ky01n")
 
 [node name="Player" parent="." instance=ExtResource("2_gxm3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.9902, 0.94587, 30.5305)
+cameraAcceleration = 3.0
 
 [node name="RayCast3D" type="RayCast3D" parent="Player"]
-target_position = Vector3(0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, -0.999964, 0.00853448, 0, -0.00853448, -0.999964, -0.125126, -0.0716643, 0.0291882)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qc4ne")
@@ -469,11 +522,11 @@ skeleton = NodePath("")
 mesh = SubResource("BoxMesh_u647q")
 skeleton = NodePath("")
 
-[node name="Anomaly2" parent="Node3D" instance=ExtResource("4_ywebg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.1663, 1.92491, -61.9061)
-
 [node name="Anomaly" parent="." instance=ExtResource("3_psqrq")]
 transform = Transform3D(1, 1.97906e-09, -4.19386e-08, -3.60887e-09, 1, 9.31323e-10, 7.68523e-08, -4.65661e-09, 1, 26.1547, 1.40332, -30.5536)
+
+[node name="Anomaly2" parent="." instance=ExtResource("4_ywebg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4155, 0.520992, -49.3495)
 
 [node name="Node3D2" parent="." instance=ExtResource("5_v866m")]
 transform = Transform3D(4.22397, 0, 0, 0, 4.72133, 0, 0, 0, 6.22885, -24.4722, 0.5, -8.41972)
@@ -494,3 +547,9 @@ directional_shadow_split_2 = 0.271
 directional_shadow_fade_start = 0.638
 directional_shadow_max_distance = 6.5
 directional_shadow_pancake_size = 75.6
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2x4b6")
+}
+tree_root = SubResource("AnimationNodeStateMachine_67d3q")

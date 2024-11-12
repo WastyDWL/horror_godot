@@ -9,9 +9,16 @@ extends CharacterBody3D
 const sprinting_speed = 11.8
 const crouching_speed = 3.0
 
+@onready var walk: AudioStreamPlayer3D = $audios/walk
+
 var lerp_speed = 10.0
 
 var crouching_depth = -1
+
+var walking = false
+
+
+
 
 @onready var camera = $head/Camera3D
 @onready var head = $head
@@ -22,7 +29,7 @@ var crouching_depth = -1
 @onready var flashlitght = $Hand/SpotLight3D
 
 
-
+var can_headbob = 1
 var direction = Vector3.ZERO
 var head_y_axis = 0.0
 var camera_x_axis = 0.0
@@ -48,12 +55,27 @@ func _process(delta):
 	
 	hand.rotation.y = -deg_to_rad(head_y_axis)
 	flashlitght.rotation.x = -deg_to_rad(camera_x_axis)
+	
+	var input_movement_vector = Vector2()
+	
+		
+	if direction:
+		walking = true
+	else:
+		walking = false
+
+	if walking and !walk.playing:
+		walk.play()
+	elif !walking and walk.playing:
+		walk.stop()
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y += jumpForce
+		walk.stop()
 	else:
 		velocity.y -= gravity * delta
 	move_and_slide()
+	
 	
 	if Input.is_action_pressed("crouch"):
 		playerSpeed = crouching_speed

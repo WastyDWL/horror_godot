@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://chfq7t55ocf1k"]
+[gd_scene load_steps=13 format=3 uid="uid://chfq7t55ocf1k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_qexrp"]
 [ext_resource type="Shader" path="res://Scenes/player.gdshader" id="2_ao2x2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dsboes4wu38u3" path="res://png-klev-club-p-svet-far-png-24.png" id="3_i7jmx"]
 [ext_resource type="AudioStream" uid="uid://buyt2oxjkrsn0" path="res://sounds/websdr_recording_2024-10-30T17_46_09Z_3750.9kHz.mp3" id="5_i3uhl"]
 [ext_resource type="PackedScene" uid="uid://cntiiryj5aduf" path="res://models/radio_yaesu_vx-8.glb" id="5_mb148"]
+[ext_resource type="AudioStream" uid="uid://cvw4f5h6qsa1l" path="res://sounds/foot sound/footsteps.wav" id="7_gom35"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5thyn"]
 shader = ExtResource("2_ao2x2")
@@ -45,7 +46,7 @@ cameraAcceleration = 1.0
 [node name="Hand" type="Node3D" parent="."]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36, 0.195231, -0.3)
+transform = Transform3D(1, 0, 0, 0, 0.994395, -0.105726, 0, 0.105726, 0.994395, 1.36, 0.389657, -0.3)
 light_color = Color(0.772568, 0.944884, 0.996638, 1)
 light_volumetric_fog_energy = 16.0
 light_projector = ExtResource("3_i7jmx")
@@ -54,13 +55,11 @@ spot_range = 280.991
 spot_angle = 44.588
 spot_angle_attenuation = 0.535887
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"New Bus"
-
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.848843, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(0.999962, -0.00872654, 0, 0.00872654, 0.999962, 0, 0, 0, 1, 0, 0, 0)
 cull_mask = 1023
 current = true
 
@@ -113,3 +112,15 @@ parameters/looping = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_ty3j8")
+
+[node name="audios" type="Node3D" parent="."]
+
+[node name="walk" type="AudioStreamPlayer3D" parent="audios"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.918861, 0)
+stream = ExtResource("7_gom35")
+volume_db = -10.0
+unit_size = 7.15
+bus = &"foots"
+
+[node name="RayCast3D" type="RayCast3D" parent="audios"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0904431, 0)

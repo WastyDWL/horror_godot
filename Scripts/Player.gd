@@ -10,6 +10,8 @@ const sprinting_speed = 11.8
 const crouching_speed = 3.0
 
 @onready var walk: AudioStreamPlayer3D = $audios/walk
+@onready var health = $health
+@onready var psyhik = $psyhic
 
 var lerp_speed = 10.0
 
@@ -87,3 +89,9 @@ func _process(delta):
 			playerSpeed = sprinting_speed
 		else:
 			playerSpeed = playerAcceleration
+			
+	if Input.is_action_just_pressed("health"):
+		health.value -= 5
+	
+	if Input.is_action_just_pressed("psyhik"):
+		$psyhik.value -= 5

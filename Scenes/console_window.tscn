@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3 uid="uid://fvjv5ehmr2o2"]
+
+[ext_resource type="FontFile" uid="uid://ctwfjvm2uh3ks" path="res://terminal/fonts/IBMPlexMono-Medium.ttf" id="1_pryb4"]
+[ext_resource type="Script" path="res://terminal/scripts/console_window.gd" id="1_tpyxw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37paj"]
+content_margin_left = 5.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c15g6"]
+content_margin_left = 5.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74sxi"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqjbn"]
+content_margin_left = 5.0
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gexbg"]
+content_margin_left = 5.0
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Theme" id="Theme_ktod0"]
+LineEdit/colors/font_color = Color(0, 1, 0, 1)
+LineEdit/colors/selection_color = Color(0, 1, 0, 0.352941)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_37paj")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_c15g6")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_74sxi")
+RichTextLabel/colors/default_color = Color(0, 1, 0, 1)
+RichTextLabel/colors/selection_color = Color(0.101961, 0.101961, 1, 0)
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_qqjbn")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_gexbg")
+
+[sub_resource type="FontVariation" id="FontVariation_k62gn"]
+base_font = ExtResource("1_pryb4")
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 1892.0
+offset_bottom = 992.0
+theme = SubResource("Theme_ktod0")
+script = ExtResource("1_tpyxw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Display" type="RichTextLabel" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="InputBar" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_k62gn")
+placeholder_text = "Enter command..."
+caret_blink = true
+
+[connection signal="text_submitted" from="VBoxContainer/InputBar" to="." method="_on_input_bar_text_submitted"]

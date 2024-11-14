@@ -7,6 +7,7 @@ enum ArgumentType{
 
 var argument_names: Array[String] = []
 var argument_types: Array[ArgumentType] = []
+var help: String = ""
 
 var callback: String:
 	set = callback_set, get = callback_get

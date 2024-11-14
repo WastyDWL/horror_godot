@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyhlymcmbcij7"
-path="res://.godot/imported/right_arrow_icon.png-a82ec169fc956810811343c1b966ef19.ctex"
+uid="uid://dh7q4b08gr7jn"
+path.s3tc="res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/right_arrow_icon.png"
-dest_files=["res://.godot/imported/right_arrow_icon.png-a82ec169fc956810811343c1b966ef19.ctex"]
+source_file="res://assets/GermoDver/germodver.png"
+dest_files=["res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

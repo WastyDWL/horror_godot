@@ -7,12 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://jf0k8re42n6v" path="res://interactable/object/anomaly.tscn" id="3_psqrq"]
 [ext_resource type="PackedScene" uid="uid://bw0aordonr13a" path="res://interactable/object/anomaly2.tscn" id="4_ywebg"]
 [ext_resource type="PackedScene" uid="uid://da600q0r2m6p7" path="res://node_3d.tscn" id="5_v866m"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je7ix"]
-bg_color = Color(1, 0.490196, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hein"]
-bg_color = Color(0.827451, 0.0117647, 0, 1)
+[ext_resource type="PackedScene" uid="uid://b1lpe2kx2pg1g" path="res://assets/GermoDver/GermoDver.blend" id="8_cir3r"]
+[ext_resource type="PackedScene" uid="uid://cioh3evxg2sge" path="res://assets/PultGermo/PultGermo.blend" id="9_fmfvd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38k7m"]
 bg_color = Color(0, 0, 0.0980392, 1)
@@ -109,9 +105,6 @@ offset_top = 82.0
 offset_right = 330.0
 offset_bottom = 149.0
 shortcut_context = NodePath("..")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/background = SubResource("StyleBoxFlat_je7ix")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3hein")
 step = 0.0
 value = 10.0
 
@@ -544,19 +537,41 @@ shape = SubResource("BoxShape3D_anqj0")
 mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D42" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(0.273096, 0.0165579, -0.961845, 0.0122182, -0.999831, -0.0137421, -0.96191, -0.00799945, -0.273252, -57.534, 3.11601, -1.6558)
+transform = Transform3D(0.273096, 0.0165579, -0.961845, 0.0122182, -0.999831, -0.0137421, -0.96191, -0.00799945, -0.273252, -57.534, 1.19336, -1.6558)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D42"]
 transform = Transform3D(1, -1.58325e-08, 0, -2.468e-08, 1, 2.42144e-08, 0, 1.04774e-08, 1, 0.032053, 0.164169, 0.00157166)
 shape = SubResource("BoxShape3D_anqj0")
 
 [node name="standing_collision_shape" type="MeshInstance3D" parent="Node3D/StaticBody3D42"]
+transform = Transform3D(1, -4.65661e-10, 0, -4.65661e-10, 1, 1.62981e-09, 0, -6.98492e-10, 1, -0.00282574, 0.231153, 0.00317764)
 mesh = SubResource("BoxMesh_va7ky")
 skeleton = NodePath("")
 
 [node name="crouching_collision_shape" type="MeshInstance3D" parent="Node3D/StaticBody3D42"]
 mesh = SubResource("BoxMesh_u647q")
 skeleton = NodePath("")
+
+[node name="StaticBody3D43" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(0.00594955, -1.20143, 0.113925, 0.997389, 0.00942931, -5.04694e-11, -0.00334297, 0.675066, 0.202756, -15.2971, 1.67354, -2.93963)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D43"]
+shape = SubResource("BoxShape3D_anqj0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/StaticBody3D43"]
+transform = Transform3D(1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0, 1, 0.0889823, -0.638397, 0)
+mesh = SubResource("BoxMesh_u647q")
+
+[node name="StaticBody3D44" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(0.00398061, -0.065359, 0.013495, 0.286174, -0.00095098, 0.00424954, -0.00807033, -0.0914785, 0.138696, -16.8128, 9.75603, -8.14787)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D44"]
+shape = SubResource("BoxShape3D_anqj0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/StaticBody3D44"]
+transform = Transform3D(1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0, 1, 0.0889823, -0.638397, 0)
+mesh = SubResource("BoxMesh_u647q")
+skeleton = NodePath("../../StaticBody3D44")
 
 [node name="Anomaly" parent="." instance=ExtResource("3_psqrq")]
 transform = Transform3D(1, 1.97906e-09, -4.19386e-08, -3.60887e-09, 1, 9.31323e-10, 7.68523e-08, -4.65661e-09, 1, 26.1547, 1.40332, -30.5536)
@@ -589,3 +604,9 @@ libraries = {
 "": SubResource("AnimationLibrary_2x4b6")
 }
 tree_root = SubResource("AnimationNodeStateMachine_67d3q")
+
+[node name="GermoDver" parent="." instance=ExtResource("8_cir3r")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -16.4312, 0.511724, -7.59428)
+
+[node name="PultGermo2" parent="." instance=ExtResource("9_fmfvd")]
+transform = Transform3D(0.290676, 0, -0.0742113, 0, 0.3, 0, 0.0742113, 0, 0.290676, -44.1532, 1.89473, 1.36625)

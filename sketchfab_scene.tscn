@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://clx5i5y77w7bc"]
+[gd_scene load_steps=8 format=4 uid="uid://cyfeu3777orms"]
 
 [ext_resource type="PackedScene" uid="uid://c2ohqxndt0ygd" path="res://models/others/retro_soap_dispenser2k.glb" id="1_pj7no"]
 [ext_resource type="Texture2D" uid="uid://xhse2hla55hq" path="res://models/others/retro_soap_dispenser2k_0.jpg" id="2_6gkgj"]

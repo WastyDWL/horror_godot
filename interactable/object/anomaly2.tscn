@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cw77jvda28ubq" path="res://interactable/interactable.tscn" id="1_y5c2i"]
 [ext_resource type="Script" path="res://interactable/object/collision_shape_3d.gd" id="2_grynn"]
 [ext_resource type="AudioStream" uid="uid://t5kiv6lwsk3u" path="res://sounds/websdr_recording_2024-10-30T17_37_03Z_1869.7kHz.mp3" id="3_g5xn3"]
-[ext_resource type="PackedScene" uid="uid://curc07g3hrmrs" path="res://effects/force_field/force_field_preview.tscn" id="4_ox836"]
+[ext_resource type="PackedScene" uid="uid://curc07g3hrmrs" path="res://assets/force_field/force_field_preview.tscn" id="4_ox836"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_f8asq"]
 map_width = 10

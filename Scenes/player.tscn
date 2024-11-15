@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://chfq7t55ocf1k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_qexrp"]
-[ext_resource type="Shader" path="res://Dithering.gdshader" id="3_71x7v"]
+[ext_resource type="Shader" path="res://shared/Dithering.gdshader" id="3_71x7v"]
 [ext_resource type="PackedScene" uid="uid://2jfjea1qvu0a" path="res://interactable/playerinteractor.tscn" id="3_f87yt"]
-[ext_resource type="Texture2D" uid="uid://dsboes4wu38u3" path="res://png-klev-club-p-svet-far-png-24.png" id="3_i7jmx"]
+[ext_resource type="Texture2D" uid="uid://dsboes4wu38u3" path="res://assets/png-klev-club-p-svet-far-png-24.png" id="3_i7jmx"]
 [ext_resource type="AudioStream" uid="uid://buyt2oxjkrsn0" path="res://sounds/websdr_recording_2024-10-30T17_46_09Z_3750.9kHz.mp3" id="5_i3uhl"]
 [ext_resource type="PackedScene" uid="uid://cntiiryj5aduf" path="res://models/radio_yaesu_vx-8.glb" id="5_mb148"]
 [ext_resource type="AudioStream" uid="uid://cvw4f5h6qsa1l" path="res://sounds/foot sound/footsteps.wav" id="7_gom35"]

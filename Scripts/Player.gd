@@ -29,6 +29,7 @@ var walking = false
 @onready  var standing_collision_shape = $"../Node3D/StaticBody3D42/standing_collision_shape"
 @onready  var crouching_collision_shape = $"../Node3D/StaticBody3D42/crouching_collision_shape"
 @onready var flashlitght = $Hand/SpotLight3D
+@onready var stamina_bar = $StaminaBar
 
 
 var can_headbob = 1
@@ -86,9 +87,13 @@ func _process(delta):
 		head.position.y = lerp(head.position.y, 1.8, delta*lerp_speed)
 		
 		if Input.is_action_pressed("sprint"):
-			playerSpeed = sprinting_speed
+			while stamina_bar.is_enough(1):
+				playerSpeed = sprinting_speed
+				stamina_bar.value -= 1 * delta
 		else:
 			playerSpeed = playerAcceleration
+			stamina_bar.recoverry(delta)
+		
 			
 	if Input.is_action_just_pressed("health"):
 		health.value -= 5

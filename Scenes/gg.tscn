@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c2bssym0nst4o"]
+[gd_scene load_steps=28 format=3 uid="uid://c2bssym0nst4o"]
 
 [ext_resource type="Script" path="res://Scripts/gg.gd" id="1_4kea2"]
 [ext_resource type="PackedScene" uid="uid://chfq7t55ocf1k" path="res://Scenes/player.tscn" id="2_gxm3f"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b1lpe2kx2pg1g" path="res://assets/GermoDver/GermoDver.blend" id="8_cir3r"]
 [ext_resource type="PackedScene" uid="uid://cioh3evxg2sge" path="res://assets/PultGermo/PultGermo.blend" id="9_fmfvd"]
 [ext_resource type="PackedScene" uid="uid://ds4o1fcsf1kp7" path="res://assets/Battery/battery.blend" id="10_uows2"]
+[ext_resource type="Shader" path="res://Scenes/gg.gdshader" id="11_4vi8x"]
+[ext_resource type="PackedScene" uid="uid://c0qm5oplcjc85" path="res://Scenes/shader.tscn" id="12_r35u3"]
 
 [sub_resource type="Sky" id="Sky_yp2cl"]
 sky_material = ExtResource("2_uig5h")
@@ -83,6 +85,18 @@ states/Start/position = Vector2(206, 100)
 states/new_animation/node = SubResource("AnimationNodeAnimation_pm650")
 states/new_animation/position = Vector2(407, 100)
 transitions = ["Start", "new_animation", SubResource("AnimationNodeStateMachineTransition_kbuaa")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ne05"]
+render_priority = 14
+shader = ExtResource("11_4vi8x")
+shader_parameter/color_depth = 7
+shader_parameter/dithering = true
+shader_parameter/resolution_scale = 4
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cgvuw"]
+material = SubResource("ShaderMaterial_2ne05")
+flip_faces = true
+orientation = 2
 
 [node name="Gg" type="Node3D"]
 script = ExtResource("1_4kea2")
@@ -467,7 +481,6 @@ mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D37" type="StaticBody3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6436, 14.6473, -0.590601)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D37"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -477,7 +490,6 @@ mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D38" type="StaticBody3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.1286, 14.6473, -0.590601)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D38"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -496,7 +508,6 @@ mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D40" type="StaticBody3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.1286, 14.6473, 29.0079)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D40"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -506,7 +517,6 @@ mesh = SubResource("BoxMesh_u647q")
 
 [node name="StaticBody3D41" type="StaticBody3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6314, 14.6473, 29.0079)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D41"]
 shape = SubResource("BoxShape3D_anqj0")
@@ -591,3 +601,15 @@ transform = Transform3D(0.290676, 0, -0.0742113, 0, 0.3, 0, 0.0742113, 0, 0.2906
 
 [node name="battery2" parent="." instance=ExtResource("10_uows2")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -43.9103, 1.88688, 3.40283)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.2274, 2.30695, 0)
+extra_cull_margin = 16384.0
+mesh = SubResource("PlaneMesh_cgvuw")
+
+[node name="Shader" parent="." instance=ExtResource("12_r35u3")]
+visible = false
+offset_left = 1.0
+offset_top = -8.0
+offset_right = 1.0
+offset_bottom = -8.0

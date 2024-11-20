@@ -1,19 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://chfq7t55ocf1k"]
+[gd_scene load_steps=18 format=3 uid="uid://chfq7t55ocf1k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_qexrp"]
+[ext_resource type="PackedScene" uid="uid://bcgrxj3hdh524" path="res://assets/Fonarik/fonarik.blend" id="3_8nssm"]
 [ext_resource type="Shader" path="res://shared/Dithering.gdshader" id="3_71x7v"]
 [ext_resource type="PackedScene" uid="uid://2jfjea1qvu0a" path="res://interactable/playerinteractor.tscn" id="3_f87yt"]
 [ext_resource type="Texture2D" uid="uid://dsboes4wu38u3" path="res://assets/png-klev-club-p-svet-far-png-24.png" id="3_i7jmx"]
+[ext_resource type="Shader" path="res://shared/Glitch.gdshader" id="4_qjb8m"]
 [ext_resource type="AudioStream" uid="uid://buyt2oxjkrsn0" path="res://sounds/websdr_recording_2024-10-30T17_46_09Z_3750.9kHz.mp3" id="5_i3uhl"]
 [ext_resource type="PackedScene" uid="uid://cntiiryj5aduf" path="res://models/radio_yaesu_vx-8.glb" id="5_mb148"]
 [ext_resource type="AudioStream" uid="uid://cvw4f5h6qsa1l" path="res://sounds/foot sound/footsteps.wav" id="7_gom35"]
 [ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="8_2oqv7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5thyn"]
-shader = ExtResource("3_71x7v")
-shader_parameter/SCREEN_WIDTH = 320.0
-shader_parameter/COLOR_FACTOR = 10.0
-shader_parameter/DITHERING_STRENTH = 0.07
+shader = ExtResource("4_qjb8m")
+shader_parameter/_ScanLineJitter = 0.25
+shader_parameter/_VerticalJump = 0.01
+shader_parameter/_HorizontalShake = 0.0
+shader_parameter/_ColorDrift = 0.02
 
 [sub_resource type="QuadMesh" id="QuadMesh_u1oe5"]
 material = SubResource("ShaderMaterial_5thyn")
@@ -23,6 +26,12 @@ size = Vector2(2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_816h2"]
 size = Vector3(0.406128, 1.86719, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xbbq0"]
+shader = ExtResource("3_71x7v")
+shader_parameter/SCREEN_WIDTH = 1920.0
+shader_parameter/COLOR_FACTOR = 10.0
+shader_parameter/DITHERING_STRENTH = 0.07
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xehto"]
 
@@ -34,9 +43,10 @@ script = ExtResource("1_qexrp")
 cameraAcceleration = 1.0
 
 [node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93867, -0.0261139)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
-transform = Transform3D(1, 0, 0, 0, 0.994395, -0.105726, 0, 0.105726, 0.994395, 1.36, 0.389657, -0.3)
+transform = Transform3D(1, 0, 0, 0, 0.994395, -0.105726, 0, 0.105726, 0.994395, 0.300311, -0.0888944, -0.475526)
 visible = false
 light_color = Color(0.772568, 0.944884, 0.996638, 1)
 light_volumetric_fog_energy = 16.0
@@ -46,8 +56,11 @@ spot_range = 280.991
 spot_angle = 44.588
 spot_angle_attenuation = 0.535887
 
+[node name="fonarik" parent="Hand" instance=ExtResource("3_8nssm")]
+transform = Transform3D(0.00164589, 0, 0.0299548, 0, 0.03, 0, -0.0299548, 0, 0.00164589, 0.27597, -0.0946735, -0.293392)
+
 [node name="head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.848843, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801666, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 transform = Transform3D(0.999962, -0.00872654, 0, 0.00872654, 0.999962, 0, 0, 0, 1, 0, 0, 0)
@@ -100,6 +113,34 @@ area_mask = 2
 emission_angle_enabled = true
 doppler_tracking = 2
 parameters/looping = false
+
+[node name="Node" type="Node" parent="head/Camera3D"]
+
+[node name="Control" type="Control" parent="head/Camera3D/Node"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="head/Camera3D/Node/Control"]
+position = Vector2(962, 545.5)
+scale = Vector2(9.66, 5.435)
+copy_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="head/Camera3D/Node/Control/BackBufferCopy"]
+material = SubResource("ShaderMaterial_xbbq0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xehto")

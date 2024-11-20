@@ -27,4 +27,4 @@ func _on_interacted(interactor: Interactor) -> void:
 
 func _on_unfocused(interactor: Interactor) -> void:
 	print("not interacted 2")
-	#audio_stream_player.stop()
+	audio_stream_player.stop()

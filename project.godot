@@ -13,6 +13,8 @@ config_version=5
 config/name="Новый игровой проект"
 run/main_scene="res://Scenes/gg.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/bg_color=Color(0.133266, 0.0799446, 0.3353, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [audio]
@@ -32,6 +34,10 @@ window/size/mode=3
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[global_group]
+
+player=""
 
 [input]
 
@@ -75,7 +81,7 @@ crouch={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-health={
+flashlitght={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":69,"location":0,"echo":false,"script":null)
 ]
@@ -89,8 +95,12 @@ psyhik={
 [layer_names]
 
 3d_physics/layer_2="interactable"
+3d_physics/layer_3="interactable2"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
+textures/default_filters/use_nearest_mipmap_filter=true

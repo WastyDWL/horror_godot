@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv0sajpiuwfv7"
-path.s3tc="res://.godot/imported/dummy_roughness.png-24c1236a6ae63f01e52d04489f2c062d.s3tc.ctex"
-path.etc2="res://.godot/imported/dummy_roughness.png-24c1236a6ae63f01e52d04489f2c062d.etc2.ctex"
+uid="uid://4swvdymnvthd"
+path.s3tc="res://.godot/imported/battary.png-ea2735ea778c15431af287f8558b4ced.s3tc.ctex"
+path.etc2="res://.godot/imported/battary.png-ea2735ea778c15431af287f8558b4ced.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/dummy/dummy_roughness.png"
-dest_files=["res://.godot/imported/dummy_roughness.png-24c1236a6ae63f01e52d04489f2c062d.s3tc.ctex", "res://.godot/imported/dummy_roughness.png-24c1236a6ae63f01e52d04489f2c062d.etc2.ctex"]
+source_file="res://assets/Konserva/Battery/battary.png"
+dest_files=["res://.godot/imported/battary.png-ea2735ea778c15431af287f8558b4ced.s3tc.ctex", "res://.godot/imported/battary.png-ea2735ea778c15431af287f8558b4ced.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0wmh5b085f4s"
 path.s3tc="res://.godot/imported/radio_yaesu_vx-8_1.png-152a1f2923ab4f54a222ffc1f2f527e5.s3tc.ctex"
+path.etc2="res://.godot/imported/radio_yaesu_vx-8_1.png-152a1f2923ab4f54a222ffc1f2f527e5.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/radio_yaesu_vx-8_1.png"
-dest_files=["res://.godot/imported/radio_yaesu_vx-8_1.png-152a1f2923ab4f54a222ffc1f2f527e5.s3tc.ctex"]
+dest_files=["res://.godot/imported/radio_yaesu_vx-8_1.png-152a1f2923ab4f54a222ffc1f2f527e5.s3tc.ctex", "res://.godot/imported/radio_yaesu_vx-8_1.png-152a1f2923ab4f54a222ffc1f2f527e5.etc2.ctex"]
 
 [params]
 

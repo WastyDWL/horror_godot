@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddvd7pdum0o4d"]
+
+[ext_resource type="PackedScene" uid="uid://ds4o1fcsf1kp7" path="res://assets/Battery/battery.blend" id="1_rsgp2"]
+
+[node name="battery2" instance=ExtResource("1_rsgp2")]

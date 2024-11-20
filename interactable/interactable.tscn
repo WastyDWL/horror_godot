@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://interactable/interactable.gd" id="1_n3yvd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vcjue"]
-radius = 2.64689
+radius = 3.59
 
 [node name="Interactable" type="Area3D"]
 collision_layer = 2

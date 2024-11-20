@@ -6,32 +6,32 @@ extends CharacterBody3D
 @export var cameraAcceleration = 3.0
 @export var jumpForce = 8.0
 @export var gravity = 10.0
-const sprinting_speed = 11.8
-const crouching_speed = 3.0
 
 @onready var walk: AudioStreamPlayer3D = $audios/walk
-@onready var health = $health
-@onready var psyhik = $psyhic
-
-var lerp_speed = 10.0
-
-var crouching_depth = -1
-
-var walking = false
-
-
-
-
 @onready var camera = $head/Camera3D
 @onready var head = $head
 @onready var hand = $Hand
 @onready var ray_cast_3d = $RayCast3D
 @onready  var standing_collision_shape = $"../Node3D/StaticBody3D42/standing_collision_shape"
 @onready  var crouching_collision_shape = $"../Node3D/StaticBody3D42/crouching_collision_shape"
+
+#переменные фонарика
 @onready var flashlitght = $Hand/SpotLight3D
+@onready var flashlitght_bar = $flashlitght_bar
+var flash = false
+var flashlightBarTimer = 0.1
+var flashlightBarRate = 0.2
+
 @onready var stamina_bar = $StaminaBar
+@onready var health = $health
+@onready var psyhik = $psyhic
 
+const sprinting_speed = 11.8
+const crouching_speed = 3.0
 
+var lerp_speed = 10.0
+var crouching_depth = -1
+var walking = false
 var can_headbob = 1
 var direction = Vector3.ZERO
 var head_y_axis = 0.0
@@ -48,6 +48,15 @@ func _input(event):
 	
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
+	
+	#Включение/выключение фонарика
+	if event is InputEventKey:
+		if event.keycode == KEY_F and event.pressed:
+			flashlitght.visible = !flashlitght.visible
+			flash = !flash
+			#выключение фонарика при достижении value равной нулю
+			if flashlitght_bar.value <= 0:
+				flashlitght.visible = false
 
 func _process(delta):
 	direction = Input.get_axis("left", "right") * head.basis.x + Input.get_axis("up", "down") * head.basis.z
@@ -61,12 +70,10 @@ func _process(delta):
 	
 	var input_movement_vector = Vector2()
 	
-		
 	if direction:
 		walking = true
 	else:
 		walking = false
-
 	if walking and !walk.playing:
 		walk.play()
 	elif !walking and walk.playing:
@@ -93,10 +100,14 @@ func _process(delta):
 		else:
 			playerSpeed = playerAcceleration
 			stamina_bar.recoverry(delta)
+
+#таймер фонарика
+	if flash:
+		flashlightBarTimer -= delta
 		
-			
-	if Input.is_action_just_pressed("health"):
-		health.value -= 5
-	
-	if Input.is_action_just_pressed("psyhik"):
-		$psyhik.value -= 5
+		if flashlightBarTimer <= 0 and flashlitght_bar.value > 0:
+			flashlitght_bar.value -= flashlightBarRate
+			flashlightBarTimer = 0.1
+		#выключение фонарика при достижении value равной нулю
+		if flashlitght_bar.value <= 0:
+			flashlitght.visible = false

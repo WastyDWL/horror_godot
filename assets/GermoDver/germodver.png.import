@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dh7q4b08gr7jn"
 path.s3tc="res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.s3tc.ctex"
+path.etc2="res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/GermoDver/germodver.png"
-dest_files=["res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.s3tc.ctex"]
+dest_files=["res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.s3tc.ctex", "res://.godot/imported/germodver.png-ffd9acdd4045c94e3f211b1593f3e480.etc2.ctex"]
 
 [params]
 

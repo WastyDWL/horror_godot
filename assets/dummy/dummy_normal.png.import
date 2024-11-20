@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dun4w5y08xrn3"
 path.s3tc="res://.godot/imported/dummy_normal.png-2813f2b310d02ef6c3da116fb22759d4.s3tc.ctex"
+path.etc2="res://.godot/imported/dummy_normal.png-2813f2b310d02ef6c3da116fb22759d4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/dummy/dummy_normal.png"
-dest_files=["res://.godot/imported/dummy_normal.png-2813f2b310d02ef6c3da116fb22759d4.s3tc.ctex"]
+dest_files=["res://.godot/imported/dummy_normal.png-2813f2b310d02ef6c3da116fb22759d4.s3tc.ctex", "res://.godot/imported/dummy_normal.png-2813f2b310d02ef6c3da116fb22759d4.etc2.ctex"]
 
 [params]
 

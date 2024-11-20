@@ -13,8 +13,7 @@ config_version=5
 config/name="Новый игровой проект"
 run/main_scene="res://Scenes/gg.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/bg_color=Color(0.133266, 0.0799446, 0.3353, 1)
-boot_splash/show_image=false
+boot_splash/image="res://assets/caa0d19da72711ef912a86abfd71494f_1.png"
 config/icon="res://icon.svg"
 
 [audio]

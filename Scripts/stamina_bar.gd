@@ -7,11 +7,15 @@ func is_enough(min_value: int) -> bool:
 	else:
 		return false
 		
+	
+func decrease(cost, rate):
+	stamina_bar.value -= cost * rate
+	
+		
 
 func recoverry(rate):
 	if stamina_bar.value < stamina_bar.max_value:
 		stamina_bar.value += 2.5 * rate
-		
 
 		
 		

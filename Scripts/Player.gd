@@ -73,8 +73,10 @@ func _process(delta):
 		walk.stop()
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y += jumpForce
-		walk.stop()
+		if stamina_bar.is_enough(10):
+			velocity.y += jumpForce
+			walk.stop()
+			stamina_bar.decrease(10, 1)
 	else:
 		velocity.y -= gravity * delta
 	move_and_slide()
@@ -87,11 +89,10 @@ func _process(delta):
 		head.position.y = lerp(head.position.y, 1.8, delta*lerp_speed)
 		
 		if Input.is_action_pressed("sprint"):
-			while stamina_bar.is_enough(1):
+			if stamina_bar.is_enough(1):
 				playerSpeed = sprinting_speed
-				stamina_bar.value -= 1 * delta
+				stamina_bar.decrease(1, delta)
 		else:
-			playerSpeed = playerAcceleration
 			stamina_bar.recoverry(delta)
 		
 			

@@ -1,9 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://fvjv5ehmr2o2"]
+[gd_scene load_steps=8 format=3 uid="uid://cyav85m2cuv7s"]
 
-[ext_resource type="FontFile" uid="uid://ctwfjvm2uh3ks" path="res://terminal/fonts/IBMPlexMono-Medium.ttf" id="1_pryb4"]
-[ext_resource type="Script" path="res://terminal/scripts/console_window.gd" id="1_tpyxw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37paj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4uap7"]
 content_margin_left = 5.0
 content_margin_right = 3.0
 content_margin_bottom = 2.0
@@ -14,7 +11,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c15g6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0cal"]
 content_margin_left = 5.0
 content_margin_right = 3.0
 content_margin_bottom = 2.0
@@ -25,14 +22,14 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74sxi"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yihs2"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqjbn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jeh3"]
 content_margin_left = 5.0
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
 border_width_left = 1
@@ -41,7 +38,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gexbg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8ef3"]
 content_margin_left = 5.0
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
 border_width_left = 1
@@ -50,25 +47,78 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 1, 0, 1)
 
-[sub_resource type="Theme" id="Theme_ktod0"]
+[sub_resource type="Theme" id="Theme_cddrq"]
 LineEdit/colors/font_color = Color(0, 1, 0, 1)
 LineEdit/colors/selection_color = Color(0, 1, 0, 0.352941)
-LineEdit/styles/focus = SubResource("StyleBoxFlat_37paj")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_c15g6")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_74sxi")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_4uap7")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_k0cal")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_yihs2")
 RichTextLabel/colors/default_color = Color(0, 1, 0, 1)
-RichTextLabel/colors/selection_color = Color(0.101961, 0.101961, 1, 0)
-RichTextLabel/styles/focus = SubResource("StyleBoxFlat_qqjbn")
-RichTextLabel/styles/normal = SubResource("StyleBoxFlat_gexbg")
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_0jeh3")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_y8ef3")
 
-[sub_resource type="FontVariation" id="FontVariation_k62gn"]
-base_font = ExtResource("1_pryb4")
+[sub_resource type="GDScript" id="GDScript_0oghk"]
+script/source = "extends PanelContainer
+@onready var display: RichTextLabel = $VBoxContainer/ScrollContainer/Display
+@onready var input_bar: LineEdit = $VBoxContainer/InputBar
+var commands = load(\"res://Scripts/commands.gd\")
+var message_buffer_limit = 100
+var message_buffer: Array[String] = []
+var commands_names = [\"/открыть файл\",\"/открыть дверь\"]
 
-[node name="PanelContainer" type="PanelContainer"]
-offset_right = 1892.0
-offset_bottom = 992.0
-theme = SubResource("Theme_ktod0")
-script = ExtResource("1_tpyxw")
+func is_command(input: String):
+	if commands_names.find(input) != -1 :
+		return true
+	else:
+		return false
+
+func execution(command):
+	match command:
+		\"/открыть файл\":
+			push_message(\"Файл открыт\")
+		\"/открыть дверь\":
+			push_message(\"Дверь открыта\")
+		
+
+func push_message(message):
+	message_buffer.push_back(message)
+	if message_buffer.size() > message_buffer_limit:
+		message_buffer.remove_at(0)
+	display.text = (\"\\n\").join(message_buffer)
+
+func clear_output():
+	message_buffer = []
+	display.text = \"\"
+	
+
+func _on_input_bar_text_submitted(input: String) -> void:
+	input_bar.clear()
+	if input.length() == 0:
+		return
+		
+	push_message(input)
+	
+	if is_command(input) == true:
+		execution(input)
+	else:
+		push_message(\"Такой команды нет\")
+	
+
+
+
+	
+"
+
+[node name="ConsolWindow" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 1.001
+anchor_bottom = 0.994
+offset_right = -0.920044
+offset_bottom = 0.0800018
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_cddrq")
+script = SubResource("GDScript_0oghk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -81,13 +131,9 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-bbcode_enabled = true
 scroll_following = true
 
 [node name="InputBar" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_k62gn")
-placeholder_text = "Enter command..."
-caret_blink = true
 
 [connection signal="text_submitted" from="VBoxContainer/InputBar" to="." method="_on_input_bar_text_submitted"]

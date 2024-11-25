@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwoukxcsmc6sl"]
-
-[ext_resource type="Script" path="res://terminal/scripts/command.gd" id="1_jg3jn"]
-
-[node name="Command" type="Node"]
-script = ExtResource("1_jg3jn")

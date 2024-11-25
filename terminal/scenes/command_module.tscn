@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg7rsl24pntus"]
-
-[ext_resource type="Script" path="res://terminal/scripts/command_module.gd" id="1_lhb3y"]
-
-[node name="CommandModule" type="Node"]
-script = ExtResource("1_lhb3y")
